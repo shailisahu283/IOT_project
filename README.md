@@ -54,7 +54,7 @@ To simulate this project:
 
 ## 📂 Project Files  
 - **Source Code**: [Fire Sensor Code](https://www.tinkercad.com/things/4gnxd8KqVTn-fire-sensor-and-extinguisher)  
-- **Presentation**: [Fire Sensor Project Presentation](Fire_Sensor_Presentation.pptx)  
+- **Presentation**: [Fire Sensor Project Presentation](fire sensor and extinguisher.pptx)  
 
 ---
 

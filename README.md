@@ -1,96 +1,90 @@
-# IOT_project
-Fire Sensor and Extinguisher     
-#code          
-//C++ code     
-     
-     #include <LiquidCrystal.h>     
-     #define D4 7     
-     #define D5 6     
-     #define D6 5     
-     #define D7 4     
-     #define E 8     
-     #define RS 9     
-     #include <Adafruit_NeoPixel.h>     
-     #define PIN 2     
-     #define N_LEDS 7     
-     LiquidCrystal LCD(9,8,7,6,5,4);     
-          
-     int piezo =3;     
-     int pump = 10;      
-     int temp = 0;     
-     int light = 0;     
-     Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800);     
-     
-     void setup()
-     {
-          Serial.begin(9600);
-          pinMode(A0, INPUT); // temp sensor
-          pinMode(A1,INPUT);// gas sensor
-          pinMode(A2,INPUT);// phototransistor
-          pinMode(piezo,OUTPUT);
-          pinMode(pump,OUTPUT);
-          LCD.begin(16,2); 
-          strip.begin();
-     }
-     
-     void loop()
-     {	
-          int temp=analogRead(A0);
-          Serial.print("The Temperature is : ");
-          Serial.println(temp);
-       
-          int light= analogRead(A2);
-          Serial.print("The value of Phototransistor :");
-          Serial.println(light);
-       
-          int a= analogRead(A1);
-          int b= map(a,0,1023,0,255);
-          Serial.print("The gas intensity is : ");
-          Serial.println(b);
-          delay(2000);
-         
-     if ((b>70 && light>5 ) || (temp>80 && light>5) || (b>70 && temp>80))
-     { 
-         digitalWrite(piezo,HIGH);
-         digitalWrite(pump,HIGH);
-         LCD.clear();                
-         LCD.setCursor(0,0);
-         LCD.print("ALERT");     
-         delay(1000);              
-         LCD.clear();             
-         LCD.setCursor(0,1); 
-         LCD.print("EVACUATE");  
-         delay(1000);
-         chase(strip.Color(255, 0, 0)); //Red
-         delay(100);
-     }
-     
-     else
-     {
-         digitalWrite(piezo,LOW);
-         digitalWrite(pump,LOW);
-         LCD.clear();           
-         LCD.setCursor(0,0);
-         LCD.print("SAFE");        
-         delay(1000);             
-         LCD.clear();           
-         LCD.setCursor(0,1);
-         LCD.print("ALL CLEAR"); 
-         delay(1000);
-         chase(strip.Color(0, 255, 0)); //green
-         delay(100);
-     }
-     }
-     
-     static void chase(uint32_t c)//Loop of the NeoPixel Strip
-     {
-       for(uint8_t i=0; i<strip.numPixels()+8; i++)
-       {
-           strip.setPixelColor(i  , c);
-           strip.setPixelColor(i-8, 0);
-           strip.show();
-           delay(50);
-       }
-     }
+# 🔥 IoT Fire Sensor and Extinguisher 🚒  
+An innovative IoT solution designed to detect fire hazards in real-time, trigger safety mechanisms, and alert users with audio-visual feedback. Stay protected, stay safe!  
 
-This is an group project i did with my friend using tinkercad :)
+---
+
+## ✨ Features  
+- **🔥 Real-Time Fire Detection**: Tracks temperature, gas levels, and light intensity to identify fire hazards.  
+- **🔔 Safety Mechanisms**: Automatically activates a piezo buzzer and water pump to extinguish the fire.  
+- **🌈 Visual Alerts**: Displays status with a NeoPixel LED strip (🟥 Red for danger, 🟩 Green for safe).  
+- **📟 Real-Time Updates**: LCD screen notifies users with alerts like "ALERT!" or "SAFE".  
+
+---
+
+## 🛠️ Components  
+### 🔌 **Hardware**  
+- TinkerCAD Circuit Simulator  
+- Temperature Sensor 🌡️  
+- Gas Sensor 🛢️  
+- Phototransistor 📡  
+- Piezo Buzzer 🔔  
+- NeoPixel LED Strip 🌈  
+
+### 💻 **Software**  
+- **Code**: Written in C++ (Arduino IDE Compatible)  
+- **Libraries Used**:  
+  - `LiquidCrystal` for LCD display  
+  - `Adafruit NeoPixel` for LED control  
+
+---
+
+## 📊 Circuit Design  
+Below is a placeholder for your circuit diagram. Add an image or TinkerCAD screenshot for better visualization.  
+![image](https://github.com/user-attachments/assets/356f9344-1ec4-4352-9538-c1e817813ff6)
+
+---
+
+## ⚙️ How It Works  
+1. 🔍 **Sensor Monitoring**: The system continuously reads values from temperature, gas, and light sensors.  
+2. 🚨 **Alert Triggering**: If thresholds are breached:  
+   - **Piezo Buzzer** rings.  
+   - **Water Pump** activates to extinguish the fire.  
+   - **NeoPixel LEDs** and **LCD Screen** provide real-time visual alerts.  
+3. 🛡️ **Safety Restored**: Once conditions normalize, the system returns to a "SAFE" state.  
+
+---
+
+## 🎥 Simulation  
+To simulate this project:  
+1. Open TinkerCAD.  
+2. Upload the provided code.  
+3. Connect the virtual components as per the circuit design.  
+
+---
+
+## 📂 Project Files  
+- **Source Code**: [Fire Sensor Code](https://www.tinkercad.com/things/4gnxd8KqVTn-fire-sensor-and-extinguisher)  
+- **Presentation**: [Fire Sensor Project Presentation](Fire_Sensor_Presentation.pptx)  
+
+---
+
+## 🚀 Future Enhancements  
+- 🌐 **Wi-Fi Integration**: Enable remote monitoring and control.  
+- ☁️ **Cloud Connectivity**: Log data in real-time for analytics and alerts.  
+- 📱 **Mobile Notifications**: Push alerts to a user’s smartphone.  
+
+---
+
+## 📸 Output Images  
+1. **Fire Detected Scenario**  
+   ![image](https://github.com/user-attachments/assets/68be62f7-f587-46c0-b2fd-011329849740)
+
+
+2. **Normal Operation Scenario**  
+   ![image](https://github.com/user-attachments/assets/fb4146f6-d77e-4428-9b48-5049b9d73db1)
+
+
+---
+
+## 👩‍💻 Author  
+**Shaili Sahu (https://github.com/shailisahu283)**  
+💌 For any questions or feedback, feel free to reach out at **shailisahu283@gmail.com**.  
+
+---
+
+## 📜 License  
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.  
+
+---  
+
+Let me know if you’d like assistance generating an AI-powered workflow diagram or any other visuals for this project! 😊  
